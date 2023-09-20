@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contral.MachineController">
+   <children>
+      <ImageView fitHeight="530.0" fitWidth="600.0" layoutY="-1.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Img/background.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="505.0" fitWidth="417.0" layoutX="80.0" layoutY="24.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Img/machine.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="coffe" ellipsisString="" layoutX="249.0" layoutY="186.0" mnemonicParsing="false" onAction="#makeCoffe" opacity="0.0" prefHeight="33.0" prefWidth="33.0" textAlignment="CENTER" textFill="TRANSPARENT" />
+      <Button fx:id="cupotion" ellipsisString="" layoutX="385.0" layoutY="186.0" mnemonicParsing="false" onAction="#makeCupotion" opacity="0.0" prefHeight="33.0" prefWidth="33.0" textAlignment="CENTER" textFill="TRANSPARENT" />
+      <Button fx:id="latte" ellipsisString="" layoutX="247.0" layoutY="256.0" mnemonicParsing="false" onAction="#makeLatte" opacity="0.0" prefHeight="33.0" prefWidth="33.0" textAlignment="CENTER" textFill="TRANSPARENT" />
+      <Button fx:id="hotcoco" ellipsisString="" layoutX="382.0" layoutY="254.0" mnemonicParsing="false" onAction="#makeHotcoco" opacity="0.0" prefHeight="33.0" prefWidth="33.0" textAlignment="CENTER" textFill="TRANSPARENT" />
+      <Button fx:id="milk" ellipsisString="" layoutX="379.0" layoutY="322.0" mnemonicParsing="false" onAction="#makeMilk" opacity="0.0" prefHeight="33.0" prefWidth="33.0" textAlignment="CENTER" textFill="TRANSPARENT" />
+      <Button fx:id="tea" ellipsisString="" layoutX="246.0" layoutY="319.0" mnemonicParsing="false" onAction="#makeTea" opacity="0.0" prefHeight="33.0" prefWidth="33.0" textAlignment="CENTER" textFill="TRANSPARENT" />
+      <ImageView fx:id="order" fitHeight="90.0" fitWidth="105.0" layoutX="263.0" layoutY="411.0" onMouseClicked="#takeOrder" pickOnBounds="true" />
+      <ImageView fx:id="coin" fitHeight="41.0" fitWidth="33.0" layoutX="455.0" layoutY="203.0" onMouseClicked="#addCoin" pickOnBounds="true" />
+      <Label fx:id="state" alignment="CENTER" contentDisplay="CENTER" layoutX="278.0" layoutY="393.0" prefHeight="17.0" prefWidth="79.0" style="-fx-background-color: black;" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <effect>
+            <Glow level="1.0" />
+         </effect>
+      </Label>
+   </children>
+</AnchorPane>
