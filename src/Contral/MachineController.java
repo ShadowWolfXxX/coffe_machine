@@ -11,7 +11,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +27,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 
 /**
@@ -53,8 +59,19 @@ public class MachineController implements Initializable {
 
     String statey = "Idle";
     boolean spam = true;
-    Media song[] = new Media[5];
+    Media song[] = new Media[7];
     File cup[] = new File[6];
+    @FXML
+    private ImageView cofeMa;
+    @FXML
+    private ImageView bad;
+    @FXML
+    private ImageView good;
+    @FXML
+    private MediaView boom;
+    @FXML
+    private ImageView gun;
+    String ending = "";
 
     /**
      * Initializes the controller class.
@@ -64,6 +81,11 @@ public class MachineController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        good.setVisible(false);
+        bad.setVisible(false);
+        gun.setVisible(false);
+        boom.setVisible(false);
         try {
             Fredge.getInstance().start();
         } catch (IOException ex) {
@@ -74,6 +96,8 @@ public class MachineController implements Initializable {
         song[2] = new Media(new File(getClass().getResource("/Auido/click.wav").getPath()).toURI().toString());
         song[3] = new Media(new File(getClass().getResource("/Auido/drink.wav").getPath()).toURI().toString());
         song[4] = new Media(new File(getClass().getResource("/Auido/done.wav").getPath()).toURI().toString());
+        song[5] = new Media(new File(getClass().getResource("/Auido/nope.wav").getPath()).toURI().toString());
+        song[6] = new Media(new File(getClass().getResource("/Video/Boom.mp4").getPath()).toURI().toString());
 
         cup[0] = new File("src\\Img\\Cupotion.png");
         cup[1] = new File("src\\Img\\coffee.png");
@@ -83,7 +107,8 @@ public class MachineController implements Initializable {
         cup[5] = new File("src\\Img\\milk.png");
     }
 
-    private void make(int index) {
+    private void make(int index, String latter) {
+
         if (statey.equals("Select") && spam) {
             spam = false;
             MediaPlayer click = new MediaPlayer(song[2]);
@@ -103,37 +128,81 @@ public class MachineController implements Initializable {
                 spam = true;
             });
             makingCoffe.play();
+        } else if (spam && !statey.equals("Wating")) {
+            MediaPlayer nope = new MediaPlayer(song[5]);
+            nope.play();
+            state.setText("Enter a coin");
+            nope.setOnEndOfMedia(() -> {
+                state.setText("");
+                ending += latter;
+
+                if (ending.length() > 20) {
+                    spam = false;
+                    gun.setVisible(true);
+                    MediaPlayer booom = new MediaPlayer(song[6]);
+                    boom.setMediaPlayer(booom);
+                    Timeline timeline = new Timeline();
+                    KeyFrame keyFrame = new KeyFrame(Duration.seconds(3), e -> {
+                        boom.setVisible(true);
+                        booom.play();
+                        booom.setOnEndOfMedia(() -> {
+                            bad.setVisible(true);
+                        });
+                    });
+                    timeline.getKeyFrames().add(keyFrame);
+                    timeline.play();
+
+                }
+
+                if (ending.equals("coemnf")) {
+                    cofeMa.setVisible(false);
+                    state.setVisible(false);
+
+                    Timeline timeline = new Timeline();
+                    KeyFrame keyFrame = new KeyFrame(Duration.seconds(2), e -> {
+
+                        //Platform.runLater(() -> {   //more later stuff nice :)
+                        good.setVisible(true);//my command
+                        //});
+                    });
+                    timeline.getKeyFrames().add(keyFrame);
+                    timeline.play();
+
+                }
+
+            });
         }
+
     }
 
     @FXML
     private void makeCoffe(ActionEvent event) {
-        make(1);
+        make(1, "c");
     }
 
     @FXML
     private void makeCupotion(ActionEvent event) {
-        make(0);
+        make(0, "o");
     }
 
     @FXML
     private void makeLatte(ActionEvent event) {
-        make(3);
+        make(3, "f");
     }
 
     @FXML
     private void makeHotcoco(ActionEvent event) {
-        make(2);
+        make(2, "e");
     }
 
     @FXML
     private void makeMilk(ActionEvent event) {
-        make(5);
+        make(5, "m");
     }
 
     @FXML
     private void makeTea(ActionEvent event) {
-        make(4);
+        make(4, "n");
     }
 
     @FXML
@@ -158,6 +227,7 @@ public class MachineController implements Initializable {
     private void addCoin(MouseEvent event) {
         if (statey.equals("Idle") && spam) {
             spam = false;
+            ending = "";
             File file = new File("src\\Img\\coin.png");
             Image image = new Image(file.toURI().toString());
             coin.setImage(image);

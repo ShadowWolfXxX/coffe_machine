@@ -6,6 +6,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contral.MachineController">
@@ -15,7 +16,7 @@
             <Image url="@../Img/background.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="505.0" fitWidth="417.0" layoutX="80.0" layoutY="24.0" pickOnBounds="true">
+      <ImageView fx:id="cofeMa" fitHeight="505.0" fitWidth="417.0" layoutX="80.0" layoutY="24.0" pickOnBounds="true">
          <image>
             <Image url="@../Img/machine.png" />
          </image>
@@ -36,5 +37,21 @@
             <Glow level="1.0" />
          </effect>
       </Label>
+      <ImageView fx:id="good" fitHeight="522.0" fitWidth="592.0" layoutX="5.0" layoutY="4.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Img/good.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="gun" fitHeight="150.0" fitWidth="200.0" layoutX="51.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Img/gun.png" />
+         </image>
+      </ImageView>
+      <MediaView fx:id="boom" fitHeight="400.0" fitWidth="400.0" layoutX="100.0" layoutY="56.0" />
+      <ImageView fx:id="bad" fitHeight="522.0" fitWidth="586.0" layoutX="9.0" layoutY="6.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Img/bad.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
