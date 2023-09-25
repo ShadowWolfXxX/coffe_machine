@@ -29,6 +29,8 @@ public class Cafe extends Application{
         
         FXMLLoader lol = new FXMLLoader(getClass().getResource("/view/Machine.fxml"));
         Scene s = new Scene(lol.load());
+             primaryStage.setResizable(false);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(s);
         primaryStage.show();
     }
