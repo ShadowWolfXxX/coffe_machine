@@ -72,6 +72,8 @@ public class MachineController implements Initializable {
     @FXML
     private ImageView gun;
     String ending = "";
+    @FXML
+    private Button close;
 
     /**
      * Initializes the controller class.
@@ -243,6 +245,11 @@ public class MachineController implements Initializable {
 
         }
 
+    }
+
+    @FXML
+    private void closeApp(ActionEvent event) {
+        Platform.exit();
     }
 
 }
